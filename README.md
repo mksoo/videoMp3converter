@@ -11,7 +11,13 @@ ffmpeg를 사용하여 MP4 파일(동영상)에서 오디오를 추출해 MP3로
 
 ## 사용법
 ```bash
-# 단일 파일 변환 (동일 폴더에 .mp3 생성)
+# 기본 사용 (./video 디렉터리의 mp4를 ./audio로 변환)
+python3 main.py
+
+# 재귀적으로 하위 폴더까지 검색
+python3 main.py -r
+
+# 단일 파일 변환
 python3 main.py path/to/video.mp4
 
 # 출력 디렉터리 지정
@@ -24,12 +30,13 @@ python3 main.py path/to/input_dir -r
 python3 main.py path/to/video.mp4 -b 256k
 
 # 이미 존재하는 출력 파일 덮어쓰기
-python3 main.py path/to/video.mp4 -y
+python3 main.py -y
 ```
 
 ## 옵션
-- `-o, --output-dir`: 출력 MP3 저장 디렉터리
-- `-b, --bitrate`: 오디오 비트레이트 (예: 128k, 192k, 256k)
+- `input`: 입력 MP4 파일 또는 디렉터리 (기본값: ./video)
+- `-o, --output-dir`: 출력 MP3 저장 디렉터리 (기본값: ./audio)
+- `-b, --bitrate`: 오디오 비트레이트 (예: 128k, 192k, 256k, 기본값: 192k)
 - `-r, --recursive`: 디렉터리 입력 시 하위 폴더까지 검색
 - `-y, --overwrite`: 동일 이름의 파일이 있을 때 덮어쓰기
 
