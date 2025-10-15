@@ -105,14 +105,16 @@ def parse_args(argv: List[str]) -> argparse.Namespace:
     parser.add_argument(
         "input",
         type=Path,
-        help="입력 MP4 파일 또는 디렉터리",
+        nargs="?",
+        default=Path("./video"),
+        help="입력 MP4 파일 또는 디렉터리 (기본값: ./video)",
     )
     parser.add_argument(
         "-o",
         "--output-dir",
         type=Path,
-        default=None,
-        help="출력 MP3를 저장할 디렉터리 (지정하지 않으면 입력 파일과 동일한 위치)",
+        default=Path("./audio"),
+        help="출력 MP3를 저장할 디렉터리 (기본값: ./audio)",
     )
     parser.add_argument(
         "-b",
@@ -152,6 +154,8 @@ def main(argv: List[str]) -> int:
 
     total = len(inputs)
     failures = 0
+
+    print(f"[{total}]개의 파일을 찾았습니다.")
 
     for idx, src in enumerate(inputs, start=1):
         dst = build_output_path(src, args.output_dir)
